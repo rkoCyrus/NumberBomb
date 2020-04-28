@@ -1,0 +1,5 @@
+package numberbomb
+
+func main() {
+
+}
