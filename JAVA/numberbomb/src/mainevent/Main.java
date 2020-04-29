@@ -13,13 +13,15 @@ public class Main {
         while (true) {
             try {
                 key = new Scanner(System.in);
+                int lvl;
                 System.out.print("Difficultty? (1-3): ");
-                int lvl = key.nextInt();
+                lvl = key.nextInt();
                 GenNum gn = new GenNum(lvl);
-                if (gn.getNum()<=0) {
+                if (gn.getNum()==0) {
                     continue;
                 } else {
                     cA = new CurrentArange(gn.getMaxium());
+                    break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Number please");

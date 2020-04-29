@@ -1,0 +1,1 @@
+# There is a place for some software like Visual Studio Code to generate class file here (runnable)
