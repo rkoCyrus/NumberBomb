@@ -3,30 +3,44 @@ package mainevent;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import lib.compare.*;
-import lib.getnumber.*;
-
 public class Main {
-    public static Scanner key;
-    private static CurrentArange cA; 
-    public static void main(String[] args) throws Exception {
-        while (true) {
-            try {
-                key = new Scanner(System.in);
-                int lvl;
-                System.out.print("Difficultty? (1-3): ");
-                lvl = key.nextInt();
-                GenNum gn = new GenNum(lvl);
-                if (gn.getNum()==0) {
-                    continue;
-                } else {
-                    cA = new CurrentArange(gn.getMaxium());
-                    break;
+    private static Scanner key;
+    private static PreGame pg;
+    private static InGame ig;
+    public static void main(String[] args) throws InterruptedException {
+        boolean isAgain = false;
+        int inputNumber;
+        do {
+            pg = new PreGame();
+            ig = new InGame(pg.getGameRequire());
+            do {
+                try {
+                    key = new Scanner(System.in);
+                    ig.getCurrentRange();
+                    System.out.print("Please enter the number what you guest: ");
+                    inputNumber = key.nextInt();
+                    ig.inputLoad(inputNumber);
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter number, please\n");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Number please");
-                continue;
+            } while (!ig.isPoped());
+            System.out.println("You lose! The program picked " + pg.getTheNumber() + "!");
+            boolean illegalInput = true;
+            while (illegalInput) {
+                System.out.print("Play again? (Y/N)");
+                char yn = key.next().charAt(0);
+                switch (yn) {
+                    case 'Y':
+                    case 'y':
+                        isAgain = true;
+                    case 'N':
+                    case 'n':
+                        illegalInput = false;
+                        break;
+                    default:
+                        System.out.println("Sorry, please type again");
+                }
             }
-        }
+        } while (isAgain);
     }
 }
