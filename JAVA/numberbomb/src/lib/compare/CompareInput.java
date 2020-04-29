@@ -25,7 +25,7 @@ public class CompareInput extends CurrentArange {
      * @param userInput Player's input
      * @return (boolean) is match the number
      */
-    public boolean popBallon(int userInput) throws InterruptedException {
+    public boolean popBalloon(int userInput) throws InterruptedException {
         if (userInput>=super.maxRange || userInput<=super.minRange) {
             System.out.println("You can't input this number into the game!\n");
         } else {

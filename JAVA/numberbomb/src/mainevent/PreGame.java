@@ -6,6 +6,10 @@ import java.util.Scanner;
 import lib.compare.*;
 import lib.getnumber.*;
 
+/**
+ * Set difficulty before the game start
+ * @author rk0_d
+ */
 public class PreGame {
     private static Scanner key;
     private static CompareInput gameProcess;
@@ -33,10 +37,18 @@ public class PreGame {
         }
     }
 
+    /**
+     * Return all data from <code>CompareInput</code>
+     * @return <code>CompareInput</code>'s data
+     */
     public CompareInput getGameRequire() {
         return gameProcess;
     }
 
+    /**
+     * Return the "correct" number
+     * @return the number which let the player lose if guest right
+     */
     public int getTheNumber() {
         return theNum;
     }
