@@ -17,12 +17,20 @@ namespace NumberBomb
         public Form1()
         {
             InitializeComponent();
+            this.preNum = 0;
         }
 
         public Form1(int preLuckNum)
         {
             InitializeComponent();
             this.preNum = preLuckNum;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Store default value
+            //Please change this if you set another difficulty when load up
+            maxNum = 100;
         }
 
         private void rbEasy_CheckedChanged(object sender, EventArgs e)
