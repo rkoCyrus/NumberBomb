@@ -12,10 +12,25 @@ namespace NumberBomb
 {
     public partial class Form1 : Form
     {
-        private int maxNum;
+        private int maxNum, popNum, preNum; //Maxium number, number that pop balloon, previous turn of popNum
+
         public Form1()
         {
             InitializeComponent();
+            this.preNum = 0;
+        }
+
+        public Form1(int preLuckNum)
+        {
+            InitializeComponent();
+            this.preNum = preLuckNum;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Store default value
+            //Please change this if you set another difficulty when load up
+            maxNum = 100;
         }
 
         private void rbEasy_CheckedChanged(object sender, EventArgs e)
@@ -31,6 +46,19 @@ namespace NumberBomb
         private void rbHard_CheckedChanged(object sender, EventArgs e)
         {
             maxNum = 500;
+        }
+
+        private void newGame_Click(object sender, EventArgs e)
+        {
+            Random luckNum = new Random();
+            do
+            {
+                popNum = luckNum.Next(2, maxNum - 1);
+            }
+            while (popNum == preNum); //Be fair that the previous number cannot use again
+            InGame mainEvent = new InGame(maxNum, popNum);
+            mainEvent.Show();
+            Close();
         }
     }
 }
