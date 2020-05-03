@@ -18,43 +18,42 @@
 *.rej
 *.so
 *.so.*
-*_pch.h.cpp
-*_resource.rc
-*.qm
-.#*
-*.*#
-**/core
-**/!core/
-**/tags
-**/.DS_Store
-**/.directory
-*.debug
-*.prl
-*.app
-**/moc_*.cpp
-**/ui_*.h
-**/qrc_*.cpp
-**/Thumbs.db
-*.res
-*.rc
-**/.qmake.cache
-**/.qmake.stash
+CPP/GUI/**/*_pch.h.cpp
+CPP/GUI/**/*_resource.rc
+CPP/GUI/**/*.qm
+CPP/GUI/**/.#*
+CPP/GUI/**/*.*#
+CPP/GUI/**/core
+CPP/GUI/**/!core/
+CPP/GUI/**/tags
+CPP/GUI/**/.directory
+CPP/GUI/**/*.debug
+CPP/GUI/**/*.prl
+CPP/GUI/**/*.app
+CPP/GUI/**//moc_*.cpp
+CPP/GUI/**//ui_*.h
+CPP/GUI/**/qrc_*.cpp
+CPP/GUI/**/Thumbs.db
+CPP/GUI/**/*.res
+CPP/GUI/**/*.rc
+CPP/GUI/**/.qmake.cache
+CPP/GUI/**/.qmake.stash
 
 # qtcreator generated files
-*.pro.user*
+CPP/GUI/**/*.pro.user*
 
 # xemacs temporary files
-*.flc
+CPP/GUI/**/*.flc
 
 # Vim temporary files
-.*.swp
+CPP/GUI/**/.*.swp
 
 # MinGW generated files
-*.Debug
-*.Release
+CPP/GUI/**/*.Debug
+CPP/GUI/**/*.Release
 
 # Python byte code
-*.pyc
+CPP/GUI/**/*.pyc
 
 # Binaries
 # --------
