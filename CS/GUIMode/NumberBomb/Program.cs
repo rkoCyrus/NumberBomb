@@ -16,7 +16,28 @@ namespace NumberBomb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            GameData gData = new GameData();
+            while (true)
+            {
+                Application.Run(new PreGame(gData));
+                if (!gData.forceExit)
+                {
+                    Application.Run(new InGame(gData));
+                } 
+                else
+                {
+                    break;
+                }
+                if (!gData.endGame())
+                {
+                    int preLuck = gData.getGameRule()[1];
+                    gData = new GameData(preLuck);
+                } 
+                else
+                {
+                    break;
+                }
+            }
         }
     }
 }
