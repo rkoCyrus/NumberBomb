@@ -214,7 +214,7 @@ CS/**/AppPackages/
 
 # Others
 CS/**/sql/
-CS/**/*.Cache
+CS/**/*.[Cc]ache
 CS/**/ClientBin/
 CS/**/[Ss]tyle[Cc]op.*
 ~$*
