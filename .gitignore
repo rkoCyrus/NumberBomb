@@ -30,14 +30,16 @@ CPP/GUI/**/.directory
 CPP/GUI/**/*.debug
 CPP/GUI/**/*.prl
 CPP/GUI/**/*.app
-CPP/GUI/**//moc_*.cpp
-CPP/GUI/**//ui_*.h
+CPP/GUI/**/moc_*.cpp
+CPP/GUI/**/moc_*.h
+CPP/GUI/**/ui_*.h
 CPP/GUI/**/qrc_*.cpp
 CPP/GUI/**/Thumbs.db
 CPP/GUI/**/*.res
 CPP/GUI/**/*.rc
 CPP/GUI/**/.qmake.cache
 CPP/GUI/**/.qmake.stash
+CPP/GUI/**/*build-*
 
 # qtcreator generated files
 CPP/GUI/**/*.pro.user*
