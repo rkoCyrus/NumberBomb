@@ -15,8 +15,8 @@ namespace NumberBomb
         private GameData gd;
         private int[] range = new int[2]; //0 = min, 1 = max
         private string displayGuide = "Please press the keypad below : ";
-        private string kpInput = "";
         private bool soneLose = false;
+        private InputList digitInput = new InputList();
 
         public InGame(GameData gData)
         {
@@ -35,67 +35,67 @@ namespace NumberBomb
 
         private void button1_Click(object sender, EventArgs e)
         {
-            kpInput += "1";
+            digitInput.inserting("1");
             inputLock();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            kpInput += "2";
+            digitInput.inserting("2");
             inputLock();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            kpInput += "3";
+            digitInput.inserting("3");
             inputLock();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            kpInput += "4";
+            digitInput.inserting("4");
             inputLock();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            kpInput += "5";
+            digitInput.inserting("5");
             inputLock();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            kpInput += "6";
+            digitInput.inserting("6");
             inputLock();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            kpInput += "7";
+            digitInput.inserting("7");
             inputLock();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            kpInput += "8";
+            digitInput.inserting("8");
             inputLock();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            kpInput += "9";
+            digitInput.inserting("9");
             inputLock();
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            kpInput += "0";
+            digitInput.inserting("0");
             inputLock();
         }
 
         private void inputLock()
         {
-            if (kpInput.Length >= 3)
+            if (digitInput.getFilled() >= 3)
             {
                 button0.Enabled = false;
                 button1.Enabled = false;
@@ -121,27 +121,35 @@ namespace NumberBomb
                 button8.Enabled = true;
                 button9.Enabled = true;
             }
-            guider.Text = displayGuide + kpInput;
+            guider.Text = displayGuide + digitInput.getDigit();
+        }
+
+        private void wipeNode()
+        {
+            while (digitInput.getFilled() != 0)
+            {
+                digitInput.removing();
+            }
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            kpInput = "";
+            wipeNode();
             inputLock();
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
-            if (kpInput.Length <= 0 || kpInput.Length > 3)
+            if (digitInput.getFilled() <= 0 || digitInput.getFilled() > 3)
             {
                 MessageBox.Show("Please enter valid number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                kpInput = "";
+                wipeNode();
                 inputLock();
             } 
-            else if (int.Parse(kpInput) <= range[0] || int.Parse(kpInput) >= range[1])
+            else if (int.Parse(digitInput.getDigit()) <= range[0] || int.Parse(digitInput.getDigit()) >= range[1])
             {
                 MessageBox.Show("The number is out of range!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                kpInput = "";
+                wipeNode();
                 inputLock();
             }
             else
@@ -159,6 +167,7 @@ namespace NumberBomb
                 button9.Enabled = false;
                 buttonEnter.Enabled = false;
                 buttonReset.Enabled = false;
+                buttonBack.Enabled = false;
                 waitResult.Start();
             }
         }
@@ -183,7 +192,7 @@ namespace NumberBomb
         private void waitResult_Tick(object sender, EventArgs e)
         {
             waitResult.Stop();
-            if (validator(int.Parse(kpInput), gd.getGameRule()[1]))
+            if (validator(int.Parse(digitInput.getDigit()), gd.getGameRule()[1]))
             {
                 MessageBox.Show("The \"Lucky number\" is " + gd.getGameRule()[1], "You lose", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 guider.Text = "The balloon poped!";
@@ -193,23 +202,33 @@ namespace NumberBomb
             }
             else
             {
-                if (int.Parse(kpInput) < gd.getGameRule()[1])
+                if (int.Parse(digitInput.getDigit()) < gd.getGameRule()[1])
                 {
-                    range[0] = int.Parse(kpInput);
+                    range[0] = int.Parse(digitInput.getDigit());
                 }
-                else if (int.Parse(kpInput) > gd.getGameRule()[1])
+                else if (int.Parse(digitInput.getDigit()) > gd.getGameRule()[1])
                 {
-                    range[1] = int.Parse(kpInput);
+                    range[1] = int.Parse(digitInput.getDigit());
                 }
                 smallNum.Text = range[0].ToString();
                 bigNum.Text = range[1].ToString();
                 MessageBox.Show("The current range is from " + range[0].ToString() + " to " + range[1].ToString(), "You safe");
                 guider.Text = displayGuide;
-                kpInput = "";
+                wipeNode();
                 inputLock();
                 buttonEnter.Enabled = true;
                 buttonReset.Enabled = true;
+                buttonBack.Enabled = true;
             }
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            if (digitInput.getFilled() > 0)
+            {
+                digitInput.removing();
+            }
+            inputLock();
         }
     }
 }

@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameData.cs" />
+    <Compile Include="InputList.cs" />
+    <Compile Include="InputNode.cs" />
     <Compile Include="PreGame.cs">
       <SubType>Form</SubType>
     </Compile>

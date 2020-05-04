@@ -46,6 +46,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.waitResult = new System.Windows.Forms.Timer(this.components);
+            this.buttonBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -204,11 +205,22 @@
             this.waitResult.Interval = 3000;
             this.waitResult.Tick += new System.EventHandler(this.waitResult_Tick);
             // 
+            // buttonBack
+            // 
+            this.buttonBack.Location = new System.Drawing.Point(612, 198);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(176, 75);
+            this.buttonBack.TabIndex = 15;
+            this.buttonBack.Text = "Backspace";
+            this.buttonBack.UseVisualStyleBackColor = true;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
             // InGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.buttonEnter);
@@ -253,5 +265,6 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Timer waitResult;
+        private System.Windows.Forms.Button buttonBack;
     }
 }
