@@ -12,9 +12,19 @@ namespace NumberBomb
 {
     public partial class PreGame : Form
     {
+        /// <summary>
+        /// Difficulties for range of number
+        /// </summary>
         private int maxNum;
+        /// <summary>
+        /// Game data (must be nothing modified inside)
+        /// </summary>
         private GameData gd;
 
+        /// <summary>
+        /// Game menu
+        /// </summary>
+        /// <param name="gData">Game data</param>
         public PreGame(GameData gData)
         {
             InitializeComponent();
