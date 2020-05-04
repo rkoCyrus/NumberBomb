@@ -6,18 +6,41 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech.Synthesis;
 using System.Windows.Forms;
 
 namespace NumberBomb
 {
+    /// <summary>
+    /// All main event of this game
+    /// </summary>
     public partial class InGame : Form
     {
+        /// <summary>
+        /// Data for storing user's value
+        /// </summary>
         private GameData gd;
+        /// <summary>
+        /// Range of the number
+        /// </summary>
         private int[] range = new int[2]; //0 = min, 1 = max
+        /// <summary>
+        /// Default text for guider label
+        /// </summary>
         private string displayGuide = "Please press the keypad below : ";
+        /// <summary>
+        /// Check is someone guest "correct" number
+        /// </summary>
         private bool soneLose = false;
+        /// <summary>
+        /// Link list (using link queue) to input digit
+        /// </summary>
         private InputList digitInput = new InputList();
 
+        /// <summary>
+        /// Initalizing all event of the game
+        /// </summary>
+        /// <param name="gData">Game data</param>
         public InGame(GameData gData)
         {
             InitializeComponent();
@@ -93,6 +116,9 @@ namespace NumberBomb
             inputLock();
         }
 
+        /// <summary>
+        /// Disable after input 3 digit, also update guider text
+        /// </summary>
         private void inputLock()
         {
             if (digitInput.getFilled() >= 3)
@@ -124,6 +150,9 @@ namespace NumberBomb
             guider.Text = displayGuide + digitInput.getDigit();
         }
 
+        /// <summary>
+        /// Clear all nodes data
+        /// </summary>
         private void wipeNode()
         {
             while (digitInput.getFilled() != 0)
@@ -172,6 +201,12 @@ namespace NumberBomb
             }
         }
 
+        /// <summary>
+        /// Checking does user inputed same number which picked by computer
+        /// </summary>
+        /// <param name="inputNumber">User's input</param>
+        /// <param name="luckyNumber">Computer generated number</param>
+        /// <returns>Is the input matched</returns>
         private bool validator(int inputNumber,int luckyNumber)
         {
             return inputNumber == luckyNumber;
@@ -189,11 +224,20 @@ namespace NumberBomb
             }
         }
 
+        /// <summary>
+        /// Slient and wait until get result
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void waitResult_Tick(object sender, EventArgs e)
         {
             waitResult.Stop();
+            SpeechSynthesizer announcer = new SpeechSynthesizer();
+            announcer.SetOutputToDefaultAudioDevice();
             if (validator(int.Parse(digitInput.getDigit()), gd.getGameRule()[1]))
             {
+                announcer.Rate = -2;
+                announcer.Speak("You lose");
                 MessageBox.Show("The \"Lucky number\" is " + gd.getGameRule()[1], "You lose", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 guider.Text = "The balloon poped!";
                 smallNum.Text = bigNum.Text = gd.getGameRule()[1].ToString();
@@ -212,6 +256,8 @@ namespace NumberBomb
                 }
                 smallNum.Text = range[0].ToString();
                 bigNum.Text = range[1].ToString();
+                announcer.Rate = -5;
+                announcer.Speak(smallNum.Text + " to " + bigNum.Text);
                 MessageBox.Show("The current range is from " + range[0].ToString() + " to " + range[1].ToString(), "You safe");
                 guider.Text = displayGuide;
                 wipeNode();
@@ -220,6 +266,7 @@ namespace NumberBomb
                 buttonReset.Enabled = true;
                 buttonBack.Enabled = true;
             }
+            announcer.Dispose();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
