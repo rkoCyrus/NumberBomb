@@ -3,9 +3,7 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class gameevent;
-}
+namespace Ui { class gameevent; }
 
 class gameevent : public QMainWindow
 {

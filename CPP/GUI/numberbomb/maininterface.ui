@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Number Bomb</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.ico</normaloff>icon.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
