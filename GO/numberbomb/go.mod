@@ -1,3 +1,3 @@
-module github.com/rkoCyrus/numberbomb
+module numberbomb
 
 go 1.14
