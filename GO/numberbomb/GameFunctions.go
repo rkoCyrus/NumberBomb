@@ -35,3 +35,8 @@ func setMax(diffcode int) {
 		return
 	}
 }
+
+// Set "lucky" number
+func setLuck(pickLuck int) {
+	gd.luck = pickLuck
+}
