@@ -5,6 +5,7 @@
  * C# (Window form only, require .NET Framework 4.8)
  * Java (JDK 14.0.1 recommended)
  * Python (require python 3, python 3.8 recommended)
+ * Go (Require 1.14 at least)
 
 # Why I develop this game?
  As this game is came from a variety show, it is simple and unpredictable at first.<br>
