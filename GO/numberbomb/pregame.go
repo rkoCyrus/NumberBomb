@@ -76,6 +76,9 @@ func setluck(maxrange int) {
 				break
 			}
 		}
+		if result <= 1 {
+			continue
+		}
 	}
 	gd.lucknum = result % maxrange
 }
