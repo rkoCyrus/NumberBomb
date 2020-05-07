@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	grs "github.com/rkoCyrus/gorandomstring"
@@ -27,11 +28,12 @@ var (
 )
 
 //A flow which setup the game
-func GameSetup() {
+func (data *pregame) GameSetup() {
 	var input int
+	var err error
 	for {
-		fmt.Print("Difficulty? (1:1-100, 2:1-250, 3:1-500) : ")
-		_, err := fmt.Scanf("%d", &input)
+		fmt.Println("Difficulty? (1:1-100, 2:1-250, 3:1-500) : ")
+		input, err = scanint()
 		if err != nil {
 			fmt.Println("Number please" + "\n")
 			continue
@@ -40,24 +42,24 @@ func GameSetup() {
 			fmt.Println("Please enter 1 - 3" + "\n")
 			continue
 		} else {
-			setmax(input)
-			setluck(gd.maxrange)
+			data.setmax(input)
+			data.setluck(gd.maxrange)
 			break
 		}
 	}
 }
 
 //Set maximum number on a range
-func setmax(value int) {
+func (data *pregame) setmax(value int) {
 	switch value {
 	case 1:
-		gd.maxrange = 100
+		data.maxrange = 100
 		break
 	case 2:
-		gd.maxrange = 250
+		data.maxrange = 250
 		break
 	case 3:
-		gd.maxrange = 500
+		data.maxrange = 500
 		break
 	default:
 		return
@@ -65,7 +67,7 @@ func setmax(value int) {
 }
 
 //Set lucky number
-func setluck(maxrange int) {
+func (data *pregame) setluck(max int) {
 	result := 0
 	seed := []byte(grs.GenString(128, true))
 	for i := 0; i < len(seed); i++ {
@@ -89,43 +91,48 @@ func setluck(maxrange int) {
 			continue
 		}
 	}
-	gd.lucknum = result % maxrange
+	data.lucknum = result % max
 }
 
 /*-------Border-------*/
 
 //An interface for running game
-func GameFlow() {
-	kb := 0
+func (data *pregame) GameFlow() {
+	var kb int
+	var err error
 	minnum = 1
-	maxnum = gd.maxrange
+	maxnum = data.maxrange
 	for {
-		fmt.Println("\n" + "The current arrange is : " + string(minnum) + " - " + string(maxnum) + "\n")
-		fmt.Print("Please enter the number : ")
-		_, err := fmt.Scanf("%d", &kb)
+		fmt.Println("\n" + "The current arrange is : " + strconv.Itoa(minnum) + " - " + strconv.Itoa(maxnum) + "\n")
+		fmt.Println("Please enter the number : ")
+		kb, err = scanint()
 		if err != nil {
 			fmt.Println("Enter number please!")
 			continue
 		}
+		if kb >= maxnum || kb <= minnum {
+			fmt.Println("You can not input out of range number")
+			continue
+		}
 		time.Sleep(3 * time.Second)
-		if ismatch(kb) {
+		if data.ismatch(kb) {
 			break
 		} else {
 			continue
 		}
 	}
-	fmt.Println("You guest the \"lucky number\" : " + string(gd.lucknum) + " !")
+	fmt.Println("You guest the \"lucky number\" : " + strconv.Itoa(data.lucknum) + " !")
 	fmt.Println("You lose!")
 }
 
 //Check does user guest correct number
 //
 //If yes, he/she lose
-func ismatch(userinput int) bool {
-	if userinput == gd.lucknum {
+func (data *pregame) ismatch(userinput int) bool {
+	if userinput == data.lucknum {
 		return true
 	}
-	if userinput > gd.lucknum {
+	if userinput > data.lucknum {
 		maxnum = userinput
 	} else {
 		minnum = userinput
@@ -138,8 +145,8 @@ func ismatch(userinput int) bool {
 func main() {
 	playgame = true
 	for playgame {
-		GameSetup()
-		GameFlow()
+		gd.GameSetup()
+		gd.GameFlow()
 		valid := false
 		for !valid {
 			fmt.Print("Continue? (y/n) : ")
@@ -152,6 +159,8 @@ func main() {
 			case 'N':
 			case 'n':
 				playgame = false
+				valid = true
+				break
 			case 'Y':
 			case 'y':
 				valid = true
@@ -162,4 +171,12 @@ func main() {
 			}
 		}
 	}
+}
+
+//Convert to integer
+func scanint() (int, error) {
+	in := bufio.NewScanner(os.Stdin)
+	in.Scan()
+	convert, err := strconv.Atoi(in.Text())
+	return convert, err
 }
