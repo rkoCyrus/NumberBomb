@@ -32,7 +32,7 @@ func (data *pregame) GameSetup() {
 	var input int
 	var err error
 	for {
-		fmt.Println("Difficulty? (1:1-100, 2:1-250, 3:1-500) : ")
+		fmt.Print("Difficulty? (1:1-100, 2:1-250, 3:1-500) : ")
 		input, err = scanint()
 		if err != nil {
 			fmt.Println("Number please" + "\n")
@@ -104,7 +104,7 @@ func (data *pregame) GameFlow() {
 	maxnum = data.maxrange
 	for {
 		fmt.Println("\n" + "The current arrange is : " + strconv.Itoa(minnum) + " - " + strconv.Itoa(maxnum) + "\n")
-		fmt.Println("Please enter the number : ")
+		fmt.Print("Please enter the number : ")
 		kb, err = scanint()
 		if err != nil {
 			fmt.Println("Enter number please!")
