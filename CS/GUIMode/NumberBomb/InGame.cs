@@ -36,6 +36,7 @@ namespace NumberBomb
         /// Link list (using link queue) to input digit
         /// </summary>
         private InputList digitInput = new InputList();
+        private Button[] keypad;
 
         /// <summary>
         /// Initalizing all event of the game
@@ -45,6 +46,7 @@ namespace NumberBomb
         {
             InitializeComponent();
             this.gd = gData;
+            keypad = new Button[] { button0, button1, button2, button3, button4, button5, button6, button7, button8, button9};
         }
 
         private void InGame_Load(object sender, EventArgs e)
@@ -121,31 +123,16 @@ namespace NumberBomb
         /// </summary>
         private void inputLock()
         {
-            if (digitInput.getFilled() >= 3)
+            for (int i=0;i<keypad.Length;i++)
             {
-                button0.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-                button7.Enabled = false;
-                button8.Enabled = false;
-                button9.Enabled = false;
-            }
-            else
-            {
-                button0.Enabled = true;
-                button1.Enabled = true;
-                button2.Enabled = true;
-                button3.Enabled = true;
-                button4.Enabled = true;
-                button5.Enabled = true;
-                button6.Enabled = true;
-                button7.Enabled = true;
-                button8.Enabled = true;
-                button9.Enabled = true;
+                if (digitInput.getFilled() >= 3)
+                {
+                    keypad[i].Enabled = false;
+                }
+                else
+                {
+                    keypad[i].Enabled = true;
+                }
             }
             guider.Text = displayGuide + digitInput.getDigit();
         }
@@ -184,16 +171,10 @@ namespace NumberBomb
             else
             {
                 guider.Text = "Checking your input";
-                button0.Enabled = false;
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-                button7.Enabled = false;
-                button8.Enabled = false;
-                button9.Enabled = false;
+                for (int i = 0; i < keypad.Length; i++)
+                {
+                    keypad[i].Enabled = false;
+                }
                 buttonEnter.Enabled = false;
                 buttonReset.Enabled = false;
                 buttonBack.Enabled = false;
