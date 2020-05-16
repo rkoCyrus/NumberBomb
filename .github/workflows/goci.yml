@@ -13,7 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Go-CI setup
-      uses: rkoCyrus/Go-CI@1.01
+      uses: rkoCyrus/Go-CI@1.1.0
+    - name: Display current go version
+      run: go version
     - name: Run make
       working-directory: ./GO
       run: make
