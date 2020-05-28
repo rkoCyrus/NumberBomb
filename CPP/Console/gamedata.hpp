@@ -3,9 +3,10 @@
 #define RAND_MAX = 65535
 #include <random>
 #include <time.h>
+#include "ingame.hpp"
 namespace NumberBomb
 {
-    class Gamedata
+    class Gamedata : public Ingame
     {
     private:
         //Pick a number for loading "Lucky Number"
@@ -51,6 +52,7 @@ namespace NumberBomb
     {
         isPlay = true;
         this->preLuckNum = 0;
+        
     }
 
     //Next round of the game

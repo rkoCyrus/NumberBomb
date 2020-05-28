@@ -1,9 +1,8 @@
 #ifndef PREGAME_H
 #define PREGAME_H
-#include "gamedata.hpp"
 namespace NumberBomb
 {
-    class Pregame : public Gamedata
+    class Pregame
     {
     private:
 
