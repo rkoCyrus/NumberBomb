@@ -1,5 +1,6 @@
 # NumberBomb
  A game which guest the number
+ ![Go-CI](https://github.com/rkoCyrus/NumberBomb/workflows/Go-CI/badge.svg)
  
 # Languages who have finished already
  * C# (Window form only, require .NET Framework 4.8)
