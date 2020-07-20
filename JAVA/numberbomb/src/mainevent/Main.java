@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) throws InterruptedException, NoSuchElementException {
         //Play another round or exit
-        boolean isAgain = false;
+        boolean isAgain;
 
         //Player input numbers
         int inputNumber;
@@ -26,6 +26,7 @@ public class Main {
         try {
             // Full process
             do {
+                isAgain = false;
                 pg = new PreGame();
                 ig = new InGame(pg.getGameRequire());
 
