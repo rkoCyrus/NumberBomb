@@ -5,7 +5,7 @@
  
 # Languages who have finished already
  * C# (Window form only, require .NET Framework 4.8)
- * Java (JDK 14.0.1 recommended)
+ * Java (minimum JDK 8 (I guested...), JDK 14 or above recommended)
  * Python (require python 3, python 3.8 recommended)
  * Go (Require 1.14 at least)
  
