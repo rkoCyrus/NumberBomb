@@ -72,6 +72,11 @@ while playTheGame:
         except ValueError:
             print("\nCome on, input integer please...\n")
             continue
+        except (KeyboardInterrupt, SystemExit):
+            exit(0)
+        except (KeyboardInterrupt, not SystemExit):
+            print("\nYou can't use interupter to affect program (expect Ctrl+C)")
+            continue
 
     print("\nThe balloon poped!\nThe \"lucky number\" is " + str(luckNum) + "\n\nYou lose!\n")
     
