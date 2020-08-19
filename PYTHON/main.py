@@ -1,6 +1,4 @@
-# I make this as one file only
-# I have no idea how Python work since there is no requirment of class which make me confuse on parsing data
-# To ensure it work and upload to pip, it's better to use one file for entire program
+# 19-08-2020 Update: All necessary functions in a flow will be stored as a file
 
 #Import
 import random
